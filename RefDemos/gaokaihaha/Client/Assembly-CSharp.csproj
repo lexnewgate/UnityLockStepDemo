@@ -228,7 +228,6 @@
     <Compile Include="Assets\Script\Game\EffectManager.cs" />
     <Compile Include="Assets\Script\Game\MoveCommand.cs" />
     <Compile Include="Assets\Script\Game\RotationCommand.cs" />
-    <Compile Include="Assets\Script\GuideSystem\GuideSyetem.cs" />
     <Compile Include="Assets\Script\ProtocolGenerate\ProtocolAnalysisService.cs" />
     <Compile Include="Assets\Script\ProtocolGenerate\ProtocolMessageClass.cs" />
     <Compile Include="Assets\Script\SyncClientLogic\Component\AnimComponent.cs" />
@@ -359,7 +358,6 @@
     <Compile Include="Assets\Script\SyncGameLogic\World\DemoWorld.cs" />
     <Compile Include="Assets\Script\UI\DisplayText.cs" />
     <Compile Include="Assets\Script\UI\FightBehaveWindow.cs" />
-    <Compile Include="Assets\Script\UI\GuideWindow\GuideWindow.cs" />
     <Compile Include="Assets\Script\UI\OperationWindow.cs" />
     <Compile Include="Assets\Script\UI\ResurgenceWindow.cs" />
     <Compile Include="Assets\Script\UI\SettlementWindow.cs" />
@@ -371,7 +369,6 @@
     <None Include="Assets\Resources\Data\FlyData.txt" />
     <None Include="Assets\Resources\Data\CombineData.txt" />
     <None Include="Assets\Resources\Network\ProtocolInfo.txt" />
-    <None Include="Assets\Resources\Data\GuideData.txt" />
     <None Include="Assets\Resources\Network\MethodInfo.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/gitRepos/UnityLockStepDemo/RefDemos/gaokaihaha/Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

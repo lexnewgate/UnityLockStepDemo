@@ -256,7 +256,7 @@ class ProjectBuildService : Editor
         BuildOptions option = BuildOptions.None;
         if (ApplicationMode == AppMode.Release)
         {
-            option = BuildOptions.Il2CPP;
+            //option = BuildOptions.Il2CPP;
         }
 
         BuildPipeline.BuildPlayer(GetBuildScenes(), path, BuildTarget.Android, option);
@@ -293,7 +293,7 @@ class ProjectBuildService : Editor
         BuildOptions option = BuildOptions.None;
         if (ApplicationMode == AppMode.Release)
         {
-            option = BuildOptions.Il2CPP;
+            //option = BuildOptions.Il2CPP;
         }
 
         BuildPipeline.BuildPlayer(GetBuildScenes(), ExportPath, BuildTarget.iOS, option);
