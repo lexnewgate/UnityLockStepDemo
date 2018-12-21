@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0429850-87BD-4953-A3CB-7BF83F3031E0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LockStepDemo</RootNamespace>
+    <AssemblyName>LockStepDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Server</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>LockStepDemo.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Tool-CSharp2Protocol|AnyCPU'">
+    <OutputPath>bin\Tool-CSharp2Protocol\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Tool-Protocol2CSharp|AnyCPU'">
+    <OutputPath>bin\Tool-Protocol2CSharp\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Common, Version=1.6.6.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\SuperSocket.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase, Version=1.6.6.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketEngine, Version=1.6.6.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\SuperSocket.SocketEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>lib\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generate\Data\AreaDataGenerate.cs" />
+    <Compile Include="Generate\Data\BuffDataGenerate.cs" />
+    <Compile Include="Generate\Data\CombineDataGenerate.cs" />
+    <Compile Include="Generate\Data\FlyDataGenerate.cs" />
+    <Compile Include="Generate\Data\ItemsDataGenerate.cs" />
+    <Compile Include="Generate\Data\PlayerDataGenerate.cs" />
+    <Compile Include="Generate\Data\ShiftDataGenerate.cs" />
+    <Compile Include="Generate\Data\ShopDataGenerate.cs" />
+    <Compile Include="Generate\Data\SkillDataGenerate.cs" />
+    <Compile Include="Generate\Data\SkillStatusDataGenerate.cs" />
+    <Compile Include="LockStepFrameWork\Calc\Calc.cs" />
+    <Compile Include="LockStepFrameWork\ECS\ComponentBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\ComponentTypeBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\ECSEvent.cs" />
+    <Compile Include="LockStepFrameWork\ECS\ECSGroup.cs" />
+    <Compile Include="LockStepFrameWork\ECS\ECSGroupManager.cs" />
+    <Compile Include="LockStepFrameWork\ECS\EntityBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\InputCommandManager.cs" />
+    <Compile Include="LockStepFrameWork\ECS\MomentComponentBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\MomentSingletonComponent.cs" />
+    <Compile Include="LockStepFrameWork\ECS\Record\RecordComponent.cs" />
+    <Compile Include="LockStepFrameWork\ECS\Record\RecordSystem.cs" />
+    <Compile Include="LockStepFrameWork\ECS\Record\RecordSystemBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\SingletonComponent.cs" />
+    <Compile Include="LockStepFrameWork\ECS\SyncComponentBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\SystemBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\Tools\ComponentPool.cs" />
+    <Compile Include="LockStepFrameWork\ECS\TupleBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\ViewSystemBase.cs" />
+    <Compile Include="LockStepFrameWork\ECS\WorldBase.cs" />
+    <Compile Include="LockStepFrameWork\FastCollections\BiDictionary.cs" />
+    <Compile Include="LockStepFrameWork\FastCollections\FastDictionary.cs" />
+    <Compile Include="LockStepFrameWork\FastCollections\FastList.cs" />
+    <Compile Include="LockStepFrameWork\FastCollections\FastQueue.cs" />
+    <Compile Include="LockStepFrameWork\FastCollections\FastStack.cs" />
+    <Compile Include="LockStepFrameWork\FastCollections\LSEnumerable.cs" />
+    <Compile Include="LockStepFrameWork\FastCollections\Shortcuts.cs" />
+    <Compile Include="LockStepFrameWork\GameWorldBase.cs" />
+    <Compile Include="LockStepFrameWork\KCPSession.cs" />
+    <Compile Include="LockStepFrameWork\KCPUpdate.cs" />
+    <Compile Include="LockStepFrameWork\Message\SyncMessage.cs" />
+    <Compile Include="LockStepFrameWork\Physics\Body.cs" />
+    <Compile Include="LockStepFrameWork\Physics\CustomAttributes.cs" />
+    <Compile Include="LockStepFrameWork\Physics\FixedMath.cs" />
+    <Compile Include="LockStepFrameWork\Physics\PhyscisExpandMethod.cs" />
+    <Compile Include="LockStepFrameWork\Physics\QuadTree.cs" />
+    <Compile Include="LockStepFrameWork\Physics\Vector2d.cs" />
+    <Compile Include="LockStepFrameWork\Physics\Vector3d.cs" />
+    <Compile Include="LockStepFrameWork\Reflect\DeJson.cs" />
+    <Compile Include="LockStepFrameWork\Reflect\MiniJSON.cs" />
+    <Compile Include="LockStepFrameWork\Reflect\ReflectTool.cs" />
+    <Compile Include="LockStepFrameWork\Service\Reconnect\CloseConnectTestSystem.cs" />
+    <Compile Include="LockStepFrameWork\Service\Reconnect\ReConnectService.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\CommandMessageService.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\AIComponentBase.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\ConnectionComponent.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\PlayerCommandBase.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\RealPlayerComponent.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\SelfComponent.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\ServiceComponent.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\SyncComponent.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\TheirComponent.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\Component\WaitSyncComponent.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\System\ConnectSystem.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\System\PlayerInputSystem.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\System\ServiceSyncSystem.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\System\ServiceSystem.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\System\SyncDebugSystem.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\UpdateEngine.cs" />
+    <Compile Include="LockStepFrameWork\SyncLogic\WorldManager.cs" />
+    <Compile Include="LockStepFrameWork\System\InitSystemBase.cs" />
+    <Compile Include="LockStepFrameWork\Utils\MD5Tool.cs" />
+    <Compile Include="LockStepFrameWork\Utils\ServiceTime.cs" />
+    <Compile Include="ServiceFrameWork\Database\Common\Database.cs" />
+    <Compile Include="ServiceFrameWork\Database\Common\Error.cs" />
+    <Compile Include="ServiceFrameWork\Database\Common\Function.cs" />
+    <Compile Include="ServiceFrameWork\Database\ConnectionPool.cs" />
+    <Compile Include="ServiceFrameWork\Database\Cursor\MySqlCursor.cs" />
+    <Compile Include="ServiceFrameWork\Database\DatabaseException.cs" />
+    <Compile Include="ServiceFrameWork\Database\DatabaseFactory.cs" />
+    <Compile Include="ServiceFrameWork\Database\DataBaseService.cs" />
+    <Compile Include="ServiceFrameWork\Database\Database\MySqlDatabase.cs" />
+    <Compile Include="ServiceFrameWork\Database\DbConfig.cs" />
+    <Compile Include="ServiceFrameWork\Database\Exception\MySqlException.cs" />
+    <Compile Include="ServiceFrameWork\Database\ICursor.cs" />
+    <Compile Include="ServiceFrameWork\Database\IDatabase.cs" />
+    <Compile Include="ServiceFrameWork\Database\IException.cs" />
+    <Compile Include="ServiceFrameWork\Data\DataGenerateManager.cs" />
+    <Compile Include="ServiceFrameWork\Data\DataGenerateTool.cs" />
+    <Compile Include="ServiceFrameWork\Data\DataManager.cs" />
+    <Compile Include="ServiceFrameWork\Data\DataTable.cs" />
+    <Compile Include="ServiceFrameWork\Debug.cs" />
+    <Compile Include="ServiceFrameWork\Event\EventService.cs" />
+    <Compile Include="ServiceFrameWork\FileTool\FileTool.cs" />
+    <Compile Include="ServiceFrameWork\Interface\ServiceBase.cs" />
+    <Compile Include="ServiceFrameWork\Protocol\ByteArray.cs" />
+    <Compile Include="ServiceFrameWork\Protocol\ProtocolData.cs" />
+    <Compile Include="ServiceFrameWork\Protocol\ProtocolReceiveFilter.cs" />
+    <Compile Include="ServiceFrameWork\Protocol\ProtocolReceiveFilterFactory.cs" />
+    <Compile Include="ServiceFrameWork\Protocol\ProtocolRequestBase.cs" />
+    <Compile Include="ServiceFrameWork\Protocol\ProtocolSendExpand.cs" />
+    <Compile Include="ServiceFrameWork\Protocol\ProtocolTool.cs" />
+    <Compile Include="LockStepFrameWork\SyncService.cs" />
+    <Compile Include="LockStepFrameWork\SyncSession.cs" />
+    <Compile Include="ServiceFrameWork\Utils\ExpandMethod.cs" />
+    <Compile Include="ServiceFrameWork\Utils\ParseTool.cs" />
+    <Compile Include="Service\Game\Box2D\Box2DXDebug.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\BroadPhase.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Collision.CollideCircle.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Collision.CollideEdge.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Collision.CollidePoly.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Collision.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Collision.Distance.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Collision.TimeOfImpact.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\PairManager.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Shapes\CircleShape.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Shapes\EdgeShape.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Shapes\PolygonShape.cs" />
+    <Compile Include="Service\Game\Box2D\Collision\Shapes\Shape.cs" />
+    <Compile Include="Service\Game\Box2D\Common\Mat22.cs" />
+    <Compile Include="Service\Game\Box2D\Common\Mat33.cs" />
+    <Compile Include="Service\Game\Box2D\Common\Math.cs" />
+    <Compile Include="Service\Game\Box2D\Common\Settings.cs" />
+    <Compile Include="Service\Game\Box2D\Common\Sweep.cs" />
+    <Compile Include="Service\Game\Box2D\Common\Vec2.cs" />
+    <Compile Include="Service\Game\Box2D\Common\Vec3.cs" />
+    <Compile Include="Service\Game\Box2D\Common\XForm.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Body.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\ContactManager.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Contacts\CircleContact.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Contacts\Contact.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Contacts\ContactSolver.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Contacts\EdgeAndCircleContact.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Contacts\NullContact.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Contacts\PolyAndCircleContact.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Contacts\PolyAndEdgeContact.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Contacts\PolyContact.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Controllers\BuoyancyController.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Controllers\ConstantAccelController.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Controllers\ConstantForceController.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Controllers\Controller.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Controllers\GravityController.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Controllers\TensorDampingController.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Fixture.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Island.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Joints\DistanceJoint.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Joints\GearJoint.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Joints\Joint.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Joints\LineJoint.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Joints\MouseJoint.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Joints\PrismaticJoint.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Joints\PulleyJoint.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\Joints\RevoluteJoint.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\World.cs" />
+    <Compile Include="Service\Game\Box2D\Dynamics\WorldCallbacks.cs" />
+    <Compile Include="Service\KCP\KCP.cs" />
+    <Compile Include="Service\Message\ProtocolMessage.cs" />
+    <Compile Include="Service\Module\Player.cs" />
+    <Compile Include="Service\Service\Define\ServiceErrorCode.cs" />
+    <Compile Include="Service\Service\Define\ServiceEventDefine.cs" />
+    <Compile Include="Service\Service\Login\LoginService.cs" />
+    <Compile Include="Service\Service\Match\MatchService.cs" />
+    <Compile Include="Service\Service\Shop\ShopService.cs" />
+    <Compile Include="Generate\Protocol\ProtocolAnalysisService.cs" />
+    <Compile Include="Generate\Protocol\ProtocolMessageClass.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Service\Settlement\SettlementService.cs" />
+    <Compile Include="SyncGameLogic\Component\AssetComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\BlockComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\BlowFlyComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\BuffComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\CampComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\CDComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\CollisionComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\CommandComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\FlyObjectComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\GameTimeComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\GrassComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\InputComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\ItemComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\ItemCreatePointComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\LifeComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\LifeSpanComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\MoveComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\PlayerComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\RankComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\SkillStatusComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\TransfromComponent.cs" />
+    <Compile Include="SyncGameLogic\Component\ViewComponent.cs" />
+    <Compile Include="SyncGameLogic\System\BlowFlySystem.cs" />
+    <Compile Include="SyncGameLogic\System\BuffSystem.cs" />
+    <Compile Include="SyncGameLogic\System\CollisionDamageSystem.cs" />
+    <Compile Include="SyncGameLogic\System\CollisionSystem.cs" />
+    <Compile Include="SyncGameLogic\System\CreateItemSystem.cs" />
+    <Compile Include="SyncGameLogic\System\FireSystem.cs" />
+    <Compile Include="SyncGameLogic\System\FlyObjectCollisionSystem.cs" />
+    <Compile Include="SyncGameLogic\System\GameSystem.cs" />
+    <Compile Include="SyncGameLogic\System\GrassSystem.cs" />
+    <Compile Include="SyncGameLogic\System\InitSystem.cs" />
+    <Compile Include="SyncGameLogic\System\ItemSystem.cs" />
+    <Compile Include="SyncGameLogic\System\LifeSpanSystem.cs" />
+    <Compile Include="SyncGameLogic\System\MoveSystem.cs" />
+    <Compile Include="SyncGameLogic\System\OperationSystem.cs" />
+    <Compile Include="SyncGameLogic\System\PhysicsSystem.cs" />
+    <Compile Include="SyncGameLogic\System\RankSystem.cs" />
+    <Compile Include="SyncGameLogic\System\ResurgenceSystem.cs" />
+    <Compile Include="SyncGameLogic\System\SkillStatusSystem.cs" />
+    <Compile Include="SyncGameLogic\System\SkillSystem.cs" />
+    <Compile Include="SyncGameLogic\System\TranslationOverlapSystem.cs" />
+    <Compile Include="SyncGameLogic\Utils\Calculate.cs" />
+    <Compile Include="SyncGameLogic\Utils\GameUtils.cs" />
+    <Compile Include="SyncGameLogic\Utils\SkillData.cs" />
+    <Compile Include="SyncGameLogic\Utils\SkillUtils.cs" />
+    <Compile Include="SyncGameLogic\Utils\statement.cs" />
+    <Compile Include="SyncGameLogic\World\DemoWorld.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\AreaData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\BuffData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\CombineData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\FlyData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ItemsData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\PlayerData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ShiftData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ShopData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SkillData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SkillStatusData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LockStepFrameWork\libs\Box2DX.dll" />
+    <Content Include="LockStepFrameWork\libs\UnityEngine.dll" />
+    <Content Include="Map\elementCreatePointData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Map\GrassData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Map\mapData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Network\MethodInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Network\ProtocolInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ServiceFrameWork\libs\log4net.dll" />
+    <Content Include="ServiceFrameWork\libs\SuperSocket.Common.dll" />
+    <Content Include="ServiceFrameWork\libs\SuperSocket.SocketBase.dll" />
+    <Content Include="ServiceFrameWork\libs\SuperSocket.SocketEngine.dll" />
+    <Content Include="Service\Game\Box2D\Collision\TODO.txt" />
+    <SplashScreen Include="Config\superSocket.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </SplashScreen>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Config\log4net.config" />
+    <Content Include="Config\log4net.unix.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="LockStepFrameWork\Physics\Body.cs.meta" />
+    <None Include="LockStepFrameWork\Physics\CustomAttributes.cs.meta" />
+    <None Include="LockStepFrameWork\Physics\FixedMath.cs.meta" />
+    <None Include="LockStepFrameWork\Physics\PhyscisExpandMethod.cs.meta" />
+    <None Include="LockStepFrameWork\Physics\QuadTree.cs.meta" />
+    <None Include="LockStepFrameWork\Physics\Vector2d.cs.meta" />
+    <None Include="LockStepFrameWork\Physics\Vector3d.cs.meta" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
