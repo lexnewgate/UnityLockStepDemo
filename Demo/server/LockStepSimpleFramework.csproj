@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{ECE38AA4-D0E5-4F6A-841B-D3B51F19079C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LockStepSimpleFramework</RootNamespace>
+    <AssemblyName>LockStepSimpleFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\core\action\ActionMainManager.cs" />
+    <Compile Include="Shared\core\action\ActionManager.cs" />
+    <Compile Include="Shared\core\action\BaseAction.cs" />
+    <Compile Include="Shared\core\action\DelayDo.cs" />
+    <Compile Include="Shared\core\action\MoveTo.cs" />
+    <Compile Include="Shared\core\action\MyDelegates.cs" />
+    <Compile Include="Shared\core\base\BaseObject.cs" />
+    <Compile Include="Shared\core\base\LiveObject.cs" />
+    <Compile Include="Shared\core\base\UnityObject.cs" />
+    <Compile Include="Shared\core\BattleLogic.cs" />
+    <Compile Include="Shared\core\bullet\BaseBullet.cs" />
+    <Compile Include="Shared\core\bullet\BulletFactory.cs" />
+    <Compile Include="Shared\core\bullet\DirectionShootBullet.cs" />
+    <Compile Include="Shared\core\GameData.cs" />
+    <Compile Include="Shared\core\LockStepLogic.cs" />
+    <Compile Include="Shared\core\soldier\BaseSoldier.cs" />
+    <Compile Include="Shared\core\soldier\Grizzly.cs" />
+    <Compile Include="Shared\core\soldier\SoldierFactory.cs" />
+    <Compile Include="Shared\core\SRandom.cs" />
+    <Compile Include="Shared\core\state\BaseState.cs" />
+    <Compile Include="Shared\core\state\CoolingState.cs" />
+    <Compile Include="Shared\core\state\NormalState.cs" />
+    <Compile Include="Shared\core\state\StateMachine.cs" />
+    <Compile Include="Shared\core\state\TowerAttackState.cs" />
+    <Compile Include="Shared\core\state\TowerStandState.cs" />
+    <Compile Include="Shared\core\tower\BaseTower.cs" />
+    <Compile Include="Shared\core\tower\MagicStand.cs" />
+    <Compile Include="Shared\core\tower\TowerFactory.cs" />
+    <Compile Include="Shared\Fix64.cs" />
+    <Compile Include="Shared\UnityTools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shared\core.meta" />
+    <None Include="Shared\core\action.meta" />
+    <None Include="Shared\core\action\ActionMainManager.cs.meta" />
+    <None Include="Shared\core\action\ActionManager.cs.meta" />
+    <None Include="Shared\core\action\BaseAction.cs.meta" />
+    <None Include="Shared\core\action\DelayDo.cs.meta" />
+    <None Include="Shared\core\action\MoveTo.cs.meta" />
+    <None Include="Shared\core\action\MyDelegates.cs.meta" />
+    <None Include="Shared\core\base.meta" />
+    <None Include="Shared\core\base\BaseObject.cs.meta" />
+    <None Include="Shared\core\base\LiveObject.cs.meta" />
+    <None Include="Shared\core\base\UnityObject.cs.meta" />
+    <None Include="Shared\core\BattleLogic.cs.meta" />
+    <None Include="Shared\core\bullet.meta" />
+    <None Include="Shared\core\bullet\BaseBullet.cs.meta" />
+    <None Include="Shared\core\bullet\BulletFactory.cs.meta" />
+    <None Include="Shared\core\bullet\DirectionShootBullet.cs.meta" />
+    <None Include="Shared\core\GameData.cs.meta" />
+    <None Include="Shared\core\LockStepLogic.cs.meta" />
+    <None Include="Shared\core\soldier.meta" />
+    <None Include="Shared\core\soldier\BaseSoldier.cs.meta" />
+    <None Include="Shared\core\soldier\Grizzly.cs.meta" />
+    <None Include="Shared\core\soldier\SoldierFactory.cs.meta" />
+    <None Include="Shared\core\SRandom.cs.meta" />
+    <None Include="Shared\core\state.meta" />
+    <None Include="Shared\core\state\BaseState.cs.meta" />
+    <None Include="Shared\core\state\CoolingState.cs.meta" />
+    <None Include="Shared\core\state\NormalState.cs.meta" />
+    <None Include="Shared\core\state\StateMachine.cs.meta" />
+    <None Include="Shared\core\state\TowerAttackState.cs.meta" />
+    <None Include="Shared\core\state\TowerStandState.cs.meta" />
+    <None Include="Shared\core\tower.meta" />
+    <None Include="Shared\core\tower\BaseTower.cs.meta" />
+    <None Include="Shared\core\tower\MagicStand.cs.meta" />
+    <None Include="Shared\core\tower\TowerFactory.cs.meta" />
+    <None Include="Shared\Fix64.cs.meta" />
+    <None Include="Shared\LICENSE" />
+    <None Include="Shared\README.md" />
+    <None Include="Shared\UnityTools.cs.meta" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
