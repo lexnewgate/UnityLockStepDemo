@@ -104,7 +104,9 @@
     <None Include="Shared\core\tower\TowerFactory.cs.meta" />
     <None Include="Shared\Fix64.cs.meta" />
     <None Include="Shared\LICENSE" />
+    <None Include="Shared\LICENSE.meta" />
     <None Include="Shared\README.md" />
+    <None Include="Shared\README.md.meta" />
     <None Include="Shared\UnityTools.cs.meta" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
