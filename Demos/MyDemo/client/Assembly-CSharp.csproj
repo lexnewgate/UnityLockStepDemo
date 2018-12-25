@@ -61,6 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameApp.cs" />
+    <Compile Include="Assets\Shared\Actions\ActionWrapper.cs" />
+    <Compile Include="Assets\Shared\Actions\BinarySerialization.cs" />
+    <Compile Include="Assets\Shared\Actions\IAction.cs" />
+    <Compile Include="Assets\Shared\Actions\KeyCodeAction.cs" />
+    <Compile Include="Assets\Shared\Actions\NoAction.cs" />
     <Compile Include="Assets\Shared\core\action\ActionMainManager.cs" />
     <Compile Include="Assets\Shared\core\action\ActionManager.cs" />
     <Compile Include="Assets\Shared\core\action\BaseAction.cs" />

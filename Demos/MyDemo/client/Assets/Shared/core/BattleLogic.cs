@@ -313,7 +313,7 @@ public class BattleLogic
 #if _CLIENTLOGIC_
                 SimpleSocket socket = new SimpleSocket();
                 socket.Init();
-                socket.sendBattleRecordToServer(UnityTools.playerPrefsGetString("battleRecord"));
+                //socket.send(UnityTools.playerPrefsGetString("battleRecord"));
 #endif
             }
 

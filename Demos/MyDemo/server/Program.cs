@@ -10,21 +10,32 @@ namespace ServerSocket
 	{
 		static void Main(string[] args)
 		{
-			Socket serverSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-			IPAddress ip = IPAddress.Any;
-			IPEndPoint point = new IPEndPoint(ip, 2333);
-			//socket绑定监听地址
-			serverSocket.Bind(point);
-			Console.WriteLine("Listen Success");
-			//设置同时连接个数
-			serverSocket.Listen(10);
+            Serv serv = new Serv();
+            serv.Start("127.0.0.1", 2333);
+			//Socket serverSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+			//IPAddress ip = IPAddress.Any;
+			//IPEndPoint point = new IPEndPoint(ip, 2333);
+			////socket绑定监听地址
+			//serverSocket.Bind(point);
+			//Console.WriteLine("Listen Success");
+			////设置同时连接个数
+			//serverSocket.Listen(0);
 
-			//利用线程后台执行监听,否则程序会假死
-			Thread thread = new Thread(Listen);
-			thread.IsBackground = true;
-			thread.Start(serverSocket);
+			////利用线程后台执行监听,否则程序会假死
+			//Thread thread = new Thread(Listen);
+			//thread.IsBackground = true;
+			//thread.Start(serverSocket);
 
-			Console.Read();
+            while(true)
+            {
+                string str = Console.ReadLine();
+                if(str.Equals("quit"))
+                {
+                    return;
+                }
+            }
+
+			//Console.Read();
 		}
 
 		/// <summary>
@@ -66,27 +77,31 @@ namespace ServerSocket
 				//有效字节为0则跳过
 				if (effective == 0)
 				{
-					break;
+					//break;
 				}
-				var str = Encoding.UTF8.GetString(buffer,0, effective);
-				Console.WriteLine("from client: " + str);
+                else
+                {
+				    Console.WriteLine("effective: " + effective);
+				    send.Send(buffer,effective,SocketFlags.None);
+                }
+				//var str = Encoding.UTF8.GetString(buffer,0, effective);
+				//Console.WriteLine("from client: " + str);
 
-				BattleLogic battleLogic = new BattleLogic ();
-				battleLogic.init ();
-				battleLogic.setBattleRecord (str);
-				battleLogic.replayVideo();
+				//BattleLogic battleLogic = new BattleLogic ();
+				//battleLogic.init ();
+				//battleLogic.setBattleRecord (str);
+				//battleLogic.replayVideo();
 
-				while (true) {
-					battleLogic.updateLogic();
-					if (battleLogic.m_bIsBattlePause) {
-						break;
-					}
-				}
-				Console.WriteLine("m_uGameLogicFrame: " + BattleLogic.s_uGameLogicFrame);
-				string replyContent = BattleLogic.s_uGameLogicFrame.ToString ();
-				var buffers = Encoding.UTF8.GetBytes(replyContent);
-				send.Send(buffers);
-				Console.WriteLine("send info to client");
+				//while (true) {
+				//	battleLogic.updateLogic();
+				//	if (battleLogic.m_bIsBattlePause) {
+				//		break;
+				//	}
+				//}
+				//Console.WriteLine("m_uGameLogicFrame: " + BattleLogic.s_uGameLogicFrame);
+				//string replyContent = BattleLogic.s_uGameLogicFrame.ToString ();
+				//var buffers = Encoding.UTF8.GetBytes(buffer);
+				//Console.WriteLine("send info to client");
 			}
 		}
 	}

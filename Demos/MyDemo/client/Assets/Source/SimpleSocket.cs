@@ -11,6 +11,8 @@ public class SimpleSocket {
 
     private Socket socketClient;
 
+    public static Action<byte[]> OnReceive;
+
     // Use this for initialization
     public void Init () {
         Console.WriteLine("Hello World!");
@@ -22,37 +24,37 @@ public class SimpleSocket {
         socketClient.Connect(point);
 
         //不停的接收服务器端发送的消息
-        Thread thread = new Thread(Recive);
-        thread.IsBackground = true;
-        thread.Start(socketClient);
+        //Thread thread = new Thread(Recive);
+        //thread.IsBackground = true;
+        //thread.Start(socketClient);
+        socketClient.BeginReceive(buffer, 0, buffersize, SocketFlags.None, ReceiveCb,null);
     }
 
-    /// <summary>
-    /// 接收消息
-    /// </summary>
-    /// <param name="o"></param>
-    static void Recive(object o)
+    private void ReceiveCb(IAsyncResult ar)
     {
-        var send = o as Socket;
-        while (true)
+        try
         {
-            //获取发送过来的消息
-            byte[] buffer = new byte[1024 * 1024 * 2];
-            var effective = send.Receive(buffer);
-            if (effective == 0)
-            {
-                //break;
-            }
-            var str = Encoding.UTF8.GetString(buffer, 0, effective);
-            Debug.Log("receive from server: " + str);
-            BattleUI.m_scServerInfo = str;
+            int count = socketClient.EndReceive(ar);
+            OnReceive?.Invoke(buffer);
+            socketClient.BeginReceive(buffer, 0, buffersize, SocketFlags.None, ReceiveCb,null);
+
+        }
+        catch(Exception ex)
+        {
+            Debug.Log($"{ex.ToString()}");
+            socketClient.Close();
         }
     }
 
-    public void sendBattleRecordToServer(string record)
+
+    const int buffersize = 1024 * 1024 * 2;
+    byte[] buffer = new byte[buffersize];
+   
+
+    public void send(byte[] record)
     {
-        var buffter = Encoding.UTF8.GetBytes(record);
-        var temp = socketClient.Send(buffter);
-        Thread.Sleep(1000);
+        //var buffter = Encoding.UTF8.GetBytes(record);
+        var temp = socketClient.Send(record);
+        //Thread.Sleep(1000);
     }
 }
