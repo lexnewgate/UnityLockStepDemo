@@ -15,33 +15,97 @@ public class GameApp : MonoBehaviour
         KeyCodeAction.OnInput = onInput;
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    private float AccumilatedTime = 0f;
+
+    private float FrameLength = 0.05f; //50 miliseconds
+
+    //called once per unity frame
+    public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            socket.send(GetKeyCodeActionBytes(KeyCode.W));
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            socket.send(GetKeyCodeActionBytes(KeyCode.A));
-        }
+        //Basically same logic as FixedUpdate, but we can scale it by adjusting FrameLength
+        AccumilatedTime = AccumilatedTime + Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.S))
+        //in case the FPS is too slow, we may need to update the game multiple times a frame
+        while (AccumilatedTime > FrameLength)
         {
-            socket.send(GetKeyCodeActionBytes(KeyCode.S));
+            GameFrameTurn();
+            AccumilatedTime = AccumilatedTime - FrameLength;
         }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            socket.send(GetKeyCodeActionBytes(KeyCode.D));
-        }
-
-        while(actionWrapperList.Count>0)
-        {
-            actionWrapperList.Dequeue().handle();
-        }
-
     }
+    private int GameFrame = 0;
+
+    private bool LockStepTurn()
+    { 
+    //{
+    //    //log.Debug("LockStepTurnID: " + LockStepTurnID);
+    //    //Check if we can proceed with the next turn
+    //    bool nextTurn = NextTurn();
+    //    if (nextTurn)
+    //    {
+    //        SendPendingAction();
+    //        //the first and second lockstep turn will not be ready to process yet
+    //        if (LockStepTurnID >= FirstLockStepTurnID + 3)
+    //        {
+    //            ProcessActions();
+    //        }
+    //    }
+    //    //otherwise wait another turn to recieve all input from all players
+
+    //    return nextTurn;
+        return true;
+    }
+
+
+    private void GameFrameTurn()
+    {
+        //first frame is used to process actions
+        if (GameFrame == 0)
+        {
+            if (LockStepTurn())
+            {
+                GameFrame++;
+            }
+        }
+        else
+        {
+        
+        }
+    }
+
+
+    //void Update()
+    //{
+
+
+
+
+
+    //    //if (Input.GetKeyDown(KeyCode.W))
+    //    //{
+    //    //    socket.send(GetKeyCodeActionBytes(KeyCode.W));
+    //    //}
+    //    //if (Input.GetKeyDown(KeyCode.A))
+    //    //{
+    //    //    socket.send(GetKeyCodeActionBytes(KeyCode.A));
+    //    //}
+
+    //    //if (Input.GetKeyDown(KeyCode.S))
+    //    //{
+    //    //    socket.send(GetKeyCodeActionBytes(KeyCode.S));
+    //    //}
+    //    //if (Input.GetKeyDown(KeyCode.D))
+    //    //{
+    //    //    socket.send(GetKeyCodeActionBytes(KeyCode.D));
+    //    //}
+
+    //    //while(actionWrapperList.Count>0)
+    //    //{
+    //    //    actionWrapperList.Dequeue().handle();
+    //    //}
+
+    //}
 
     void onInput(KeyCode keyCode)
     {
