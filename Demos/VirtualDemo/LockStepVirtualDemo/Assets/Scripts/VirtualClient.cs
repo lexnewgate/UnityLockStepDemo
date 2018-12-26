@@ -19,7 +19,7 @@ public class VirtualClient: MonoBehaviour
     public void Init()
     {
         VirtualManager.Instance.ConnectToServer(ID);
-        m_lockStepManager = new LockStepManager();
+        m_lockStepManager = new LockStepManager(this);
     }
 
     private void Update()
@@ -41,9 +41,14 @@ public class VirtualClient: MonoBehaviour
         m_generalActions.Enqueue(action);
     }
 
-    public void OnReceiveLockStepAction(IAction action)
+    public void OnReceiveLockStepAction(int lockStepTurn,int playerid,IAction action)
     {
+        this.m_lockStepManager.ReceiveAction(lockStepTurn, playerid, action);
+    }
 
+    public void SendLockStepAction(int lockStepId, int playerid, IAction action)
+    {
+        
     }
 
 

@@ -7,6 +7,28 @@ using UnityEngine;
 
 public class LockStepManager
 {
+
+    private VirtualClient m_virtualClient;
+
+    public LockStepManager(VirtualClient virtualClient)
+    {
+        this.m_virtualClient = virtualClient;
+        this.pendingActions = new PendingActions(this);
+        this.confirmedActions = new ConfirmedActions(this);
+        this.numberOfPlayers = VirtualManager.Instance.numberOfPlayers;
+
+
+    }
+
+    public int numberOfPlayers;
+
+    private PendingActions pendingActions;
+    private ConfirmedActions confirmedActions;
+
+    private Queue<IAction> actionsToSend;
+
+
+
     private float AccumilatedTime = 0f;
     private float FrameLength = 0.05f; //50 miliseconds
     private int GameFramesPerLocksetpTurn = 4;
@@ -90,63 +112,75 @@ public class LockStepManager
 
     private bool NextTurn()
     {
-        ////		log.Debug ("Next Turn Check: Current Turn - " + LockStepTurnID);
-        ////		log.Debug ("    priorConfirmedCount - " + confirmedActions.playersConfirmedPriorAction.Count);
-        ////		log.Debug ("    currentConfirmedCount - " + confirmedActions.playersConfirmedCurrentAction.Count);
-        ////		log.Debug ("    allPlayerCurrentActionsCount - " + pendingActions.CurrentActions.Count);
-        ////		log.Debug ("    allPlayerNextActionsCount - " + pendingActions.NextActions.Count);
-        ////		log.Debug ("    allPlayerNextNextActionsCount - " + pendingActions.NextNextActions.Count);
-        ////		log.Debug ("    allPlayerNextNextNextActionsCount - " + pendingActions.NextNextNextActions.Count);
+        if (confirmedActions.ReadyForNextTurn() && pendingActions.ReadyForNextTurn())
+        {
+            //increment the turn ID
+            LockStepTurnID++;
+            //move the confirmed actions to next turn
+            confirmedActions.NextTurn();
+            //move the pending actions to this turn
+            pendingActions.NextTurn();
 
-        //if (confirmedActions.ReadyForNextTurn() && pendingActions.ReadyForNextTurn())
-        //{
-        //    //increment the turn ID
-        //    LockStepTurnID++;
-        //    //move the confirmed actions to next turn
-        //    confirmedActions.NextTurn();
-        //    //move the pending actions to this turn
-        //    pendingActions.NextTurn();
+            return true;
+        }
 
-        //    return true;
-        //}
+        return false;
+    }
 
-        //return false;
-        throw new NotImplementedException();
+    public void AddAction(IAction action)
+    {
+        actionsToSend.Enqueue(action);
     }
 
     private void SendPendingAction()
     {
-        //IAction action = null;
-        //if (actionsToSend.Count > 0)
-        //{
-        //    action = actionsToSend.Dequeue();
-        //}
+        IAction action = null;
+        if (actionsToSend.Count > 0)
+        {
+            action = actionsToSend.Dequeue();
+        }
 
-        ////if no action for this turn, send the NoAction action
-        //if (action == null)
-        //{
-        //    action = new NoAction();
-        //}
-        ////add action to our own list of actions to process
-        //pendingActions.AddAction(action, Convert.ToInt32(Network.player.ToString()), LockStepTurnID, LockStepTurnID);
+        //if no action for this turn, send the NoAction action
+        if (action == null)
+        {
+            action = new NoAction();
+        }
+        //add action to our own list of actions to process
+        pendingActions.AddAction(action, this.m_virtualClient.ID, LockStepTurnID, LockStepTurnID);
+        //send action to other players
+        SendActionToOtherPlayers(LockStepTurnID,this.m_virtualClient.ID,action);
+
         ////confirm our own action
         //confirmedActions.playersConfirmedCurrentAction.Add(Network.player);
         ////send action to all other players
         //nv.RPC("RecieveAction", RPCMode.Others, LockStepTurnID, Network.player.ToString(), BinarySerialization.SerializeObjectToByteArray(action));
 
         //log.Debug("Sent " + (action.GetType().Name) + " action for turn " + LockStepTurnID);
-
-        throw new NotImplementedException();
-
     }
 
+    public void ReceiveAction(int lockStepTurn,int clientId,IAction action)
+    {
+        pendingActions.AddAction(action, clientId, LockStepTurnID, lockStepTurn);
+        //SendConfirmActionToServer(lockStepTurn, this.m_virtualClient.ID, clientId);
+    }
+
+    //public void SendConfirmActionToServer(int lockStepTurn, int confirmingPlayerID,int confirmedPlayerID)
+    //{
+    //    throw new NotImplementedException();
+    //}
+
+    public void SendActionToOtherPlayers(int lockStepId,int playerid,IAction action)
+    {
+        this.m_virtualClient.SendLockStepAction(lockStepId, playerid, action);
+    }
+
+  
     private void ProcessActions()
     {
-        //foreach (IAction action in pendingActions.CurrentActions)
-        //{
-        //    action.ProcessAction();
-        //}
-        throw new NotImplementedException();
+        foreach (IAction action in pendingActions.CurrentActions)
+        {
+            action.ProcessAction(this.m_virtualClient);
+        }
     }
 
 }

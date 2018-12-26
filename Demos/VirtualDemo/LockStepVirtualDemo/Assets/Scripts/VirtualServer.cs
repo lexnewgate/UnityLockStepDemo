@@ -26,7 +26,6 @@ class VirtualServer:Singleton<VirtualServer>
         Debug.Log($"client {clientID} connected ");
         clientIDs.Add(clientID);
 
-
         if(clientIDs.Count==VirtualManager.Instance.numberOfPlayers)
         {
             var gameStartAction = new GameStartAction();
@@ -39,11 +38,6 @@ class VirtualServer:Singleton<VirtualServer>
         }
     }
 
-    public void OnReceive(IAction action)
-    {
-        BroadCastLockStepAction(action);
-    }
-
     public void BroadCastGeneralAction(IAction action)
     {
         foreach(var clientid in clientIDs)
@@ -52,11 +46,17 @@ class VirtualServer:Singleton<VirtualServer>
         }
     }
 
-    public void BroadCastLockStepAction(IAction action)
+   public void OnReceiveLockStepAction(int lockStepTurn, int playerId, IAction action)
     {
-        foreach (var clientid in clientIDs)
+        foreach(var clientid in clientIDs)
         {
-            VirtualManager.Instance.SendToClientLockStepAction(clientid, action);
+            if(clientid!=playerId)
+            {
+                VirtualManager.Instance.SendToClientLockStepAction(lockStepTurn, playerId, action);
+            }
         }
+
     }
+
+
 }

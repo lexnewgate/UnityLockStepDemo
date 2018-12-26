@@ -65,8 +65,10 @@
     <Compile Include="Assets\Scripts\Actions\GeneralActions\PlayerInitAction.cs" />
     <Compile Include="Assets\Scripts\Actions\IAction.cs" />
     <Compile Include="Assets\Scripts\Actions\LockStepActions\NoAction.cs" />
+    <Compile Include="Assets\Scripts\LockStep\ConfirmedActions.cs" />
     <Compile Include="Assets\Scripts\LockStep\IHasGameFrame.cs" />
     <Compile Include="Assets\Scripts\LockStep\LockStepManager.cs" />
+    <Compile Include="Assets\Scripts\LockStep\PendingActions.cs" />
     <Compile Include="Assets\Scripts\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\VirtualClient.cs" />

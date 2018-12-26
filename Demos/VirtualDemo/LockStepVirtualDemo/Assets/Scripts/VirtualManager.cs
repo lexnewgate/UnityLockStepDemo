@@ -28,9 +28,9 @@ class VirtualManager : Singleton<VirtualManager>
         VirtualServer.Instance.OnClientConnected(clientId);
     }
 
-    public void SendToServer(IAction action)
+    public void SendToServerLockStepAction(int lockStepTurn,int playerId,IAction action)
     {
-
+        VirtualServer.Instance.OnReceiveLockStepAction(lockStepTurn, playerId, action);
     }
 
     public void SendToClientGeneralAction(int clientId,IAction action)
@@ -38,11 +38,10 @@ class VirtualManager : Singleton<VirtualManager>
         virtualClientDict[clientId].OnReceiveGeneralAction(action);
     }
 
-    public void SendToClientLockStepAction(int clientId, IAction action)
+    public void SendToClientLockStepAction(int lockStepTurn,int clientId, IAction action)
     {
-
+        virtualClientDict[clientId].OnReceiveLockStepAction(lockStepTurn, clientId, action);
     }
-
 
     public void AddClient()
     {
