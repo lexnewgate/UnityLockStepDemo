@@ -9,6 +9,13 @@ public class LockStepManager
 {
     private float AccumilatedTime = 0f;
     private float FrameLength = 0.05f; //50 miliseconds
+    private int GameFramesPerLocksetpTurn = 4;
+    private int GameFrame = 0;
+    private int GameFramesPerSecond = 20;
+    public static readonly int FirstLockStepTurnID = 0;
+    public int LockStepTurnID = FirstLockStepTurnID;
+
+
     public void Update()
     {
         //Basically same logic as FixedUpdate, but we can scale it by adjusting FrameLength
@@ -25,6 +32,121 @@ public class LockStepManager
 
     private void GameFrameTurn()
     {
+        //first frame is used to process actions
+        if (GameFrame == 0)
+        {
+            if (LockStepTurn())
+            {
+                GameFrame++;
+            }
+        }
+        else
+        {
+            //update game
+            //TODO: Add custom physics
+            //SceneManager.Manager.TwoDPhysics.Update (GameFramesPerSecond);
+
+            List<IHasGameFrame> finished = new List<IHasGameFrame>();
+            foreach (IHasGameFrame obj in SceneManager.Manager.GameFrameObjects)
+            {
+                obj.GameFrameTurn(GameFramesPerSecond);
+                if (obj.Finished)
+                {
+                    finished.Add(obj);
+                }
+            }
+
+            foreach (IHasGameFrame obj in finished)
+            {
+                SceneManager.Manager.GameFrameObjects.Remove(obj);
+            }
+
+            GameFrame++;
+            if (GameFrame == GameFramesPerLocksetpTurn)
+            {
+                GameFrame = 0;
+            }
+        }
+    }
+
+    private bool LockStepTurn()
+    {
+        //log.Debug("LockStepTurnID: " + LockStepTurnID);
+        //Check if we can proceed with the next turn
+        bool nextTurn = NextTurn();
+        if (nextTurn)
+        {
+            SendPendingAction();
+            //the first and second lockstep turn will not be ready to process yet
+            if (LockStepTurnID >= FirstLockStepTurnID + 3)
+            {
+                ProcessActions();
+            }
+        }
+        //otherwise wait another turn to recieve all input from all players
+
+        return nextTurn;
+    }
+
+    private bool NextTurn()
+    {
+        ////		log.Debug ("Next Turn Check: Current Turn - " + LockStepTurnID);
+        ////		log.Debug ("    priorConfirmedCount - " + confirmedActions.playersConfirmedPriorAction.Count);
+        ////		log.Debug ("    currentConfirmedCount - " + confirmedActions.playersConfirmedCurrentAction.Count);
+        ////		log.Debug ("    allPlayerCurrentActionsCount - " + pendingActions.CurrentActions.Count);
+        ////		log.Debug ("    allPlayerNextActionsCount - " + pendingActions.NextActions.Count);
+        ////		log.Debug ("    allPlayerNextNextActionsCount - " + pendingActions.NextNextActions.Count);
+        ////		log.Debug ("    allPlayerNextNextNextActionsCount - " + pendingActions.NextNextNextActions.Count);
+
+        //if (confirmedActions.ReadyForNextTurn() && pendingActions.ReadyForNextTurn())
+        //{
+        //    //increment the turn ID
+        //    LockStepTurnID++;
+        //    //move the confirmed actions to next turn
+        //    confirmedActions.NextTurn();
+        //    //move the pending actions to this turn
+        //    pendingActions.NextTurn();
+
+        //    return true;
+        //}
+
+        //return false;
+        throw new NotImplementedException();
+    }
+
+    private void SendPendingAction()
+    {
+        //IAction action = null;
+        //if (actionsToSend.Count > 0)
+        //{
+        //    action = actionsToSend.Dequeue();
+        //}
+
+        ////if no action for this turn, send the NoAction action
+        //if (action == null)
+        //{
+        //    action = new NoAction();
+        //}
+        ////add action to our own list of actions to process
+        //pendingActions.AddAction(action, Convert.ToInt32(Network.player.ToString()), LockStepTurnID, LockStepTurnID);
+        ////confirm our own action
+        //confirmedActions.playersConfirmedCurrentAction.Add(Network.player);
+        ////send action to all other players
+        //nv.RPC("RecieveAction", RPCMode.Others, LockStepTurnID, Network.player.ToString(), BinarySerialization.SerializeObjectToByteArray(action));
+
+        //log.Debug("Sent " + (action.GetType().Name) + " action for turn " + LockStepTurnID);
+
+        throw new NotImplementedException();
 
     }
+
+    private void ProcessActions()
+    {
+        //foreach (IAction action in pendingActions.CurrentActions)
+        //{
+        //    action.ProcessAction();
+        //}
+        throw new NotImplementedException();
+    }
+
 }

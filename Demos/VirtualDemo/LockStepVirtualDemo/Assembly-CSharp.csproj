@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{89D17E5D-84F8-2EA9-D9A6-C6BB41D86484}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -64,7 +65,9 @@
     <Compile Include="Assets\Scripts\Actions\GeneralActions\PlayerInitAction.cs" />
     <Compile Include="Assets\Scripts\Actions\IAction.cs" />
     <Compile Include="Assets\Scripts\Actions\LockStepActions\NoAction.cs" />
+    <Compile Include="Assets\Scripts\LockStep\IHasGameFrame.cs" />
     <Compile Include="Assets\Scripts\LockStep\LockStepManager.cs" />
+    <Compile Include="Assets\Scripts\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\VirtualClient.cs" />
     <Compile Include="Assets\Scripts\VirtualManager.cs" />
