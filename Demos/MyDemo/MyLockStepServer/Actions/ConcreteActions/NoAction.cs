@@ -24,5 +24,12 @@ using System;
 [Serializable]
 public class NoAction : IAction
 {
-	public void ProcessAction() {}
+    int IAction.TypeID { get; set; } = ActionTypes.LockStepAction;
+
+    public void ProcessAction() {}
+
+    void IAction.ProcessAction()
+    {
+        throw new NotImplementedException();
+    }
 }

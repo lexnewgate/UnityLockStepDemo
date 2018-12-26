@@ -39,44 +39,19 @@ class PendingActions
         }
     }
 
-    /// <summary>
-    ///     
-    ///  |1|2|3|4|
-    ///   
-    ///  
-    /// 
-    /// 
-    /// 
-    /// </summary>
-    /// <returns></returns>
-
-
 
     public bool ReadyForNextTurn()
     {
-        //第一帧不需要pending
-        if(lsm.LockStepTurnID==LockStepManager.FirstLockStepTurnID) 
-        {
-            return true;
-        }
+        ////第一帧不需要pending
+        //if(lsm.LockStepTurnID==LockStepManager.FirstLockStepTurnID) 
+        //{
+        //    return true;
+        //}
 
         if(m_NextActions.Count==lsm.numberOfPlayers)
         {
             return true;
         }
-
-        ////第二帧检测第一帧是否都收到
-        //if(lsm.LockStepTurnID==LockStepManager.FirstLockStepTurnID+1)
-        //{
-        //    if(m_NextNextActions.Count==lsm.numberOfPlayers)
-        //    {
-        //        return true;
-        //    }
-        //}
-
-        //if(lsm.numberOfPlayers==m_NextActions.Count&&lsm.numberOfPlayers==m_NextNextActions.Count)
-
-
 
         return false;
 
@@ -94,10 +69,6 @@ class PendingActions
 
     void ClearCurrentActions()
     {
-        //foreach (var kv in m_CurrentActions)
-        //{
-        //    m_CurrentActions[kv.Key] = null;
-        //}
         m_CurrentActions.Clear();
     }
 

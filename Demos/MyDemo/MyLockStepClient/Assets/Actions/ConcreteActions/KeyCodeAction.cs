@@ -13,6 +13,8 @@ class KeyCodeAction : IAction
    
     public static Action<KeyCode> OnInput;
 
+    public int TypeID { get; set; } = ActionTypes.LockStepAction;
+
     public void ProcessAction()
     {
         Debug.Log($"keycode:{keycode}");

@@ -60,11 +60,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Actions\ActionTypes.cs" />
     <Compile Include="Assets\Actions\ActionWrapper.cs" />
     <Compile Include="Assets\Actions\BinarySerialization.cs" />
+    <Compile Include="Assets\Actions\ConcreteActions\GameStartAction.cs" />
+    <Compile Include="Assets\Actions\ConcreteActions\KeyCodeAction.cs" />
+    <Compile Include="Assets\Actions\ConcreteActions\NoAction.cs" />
     <Compile Include="Assets\Actions\IAction.cs" />
-    <Compile Include="Assets\Actions\KeyCodeAction.cs" />
-    <Compile Include="Assets\Actions\NoAction.cs" />
     <Compile Include="Assets\Bak\Shared\core\action\ActionMainManager.cs" />
     <Compile Include="Assets\Bak\Shared\core\action\ActionManager.cs" />
     <Compile Include="Assets\Bak\Shared\core\action\BaseAction.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Assets\LockStep\LockStepManager.cs" />
     <Compile Include="Assets\LockStep\PendingActions.cs" />
     <Compile Include="Assets\SimpleSocket.cs" />
+    <Compile Include="Assets\Singleton.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/gitRepos/UnityLockStepDemo/Demos/MyDemo/MyLockStepClient/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -334,6 +337,12 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>F:/gitRepos/UnityLockStepDemo/Demos/MyDemo/MyLockStepClient/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>F:/gitRepos/UnityLockStepDemo/Demos/MyDemo/MyLockStepClient/Assets/Plugins/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap">
+      <HintPath>F:/gitRepos/UnityLockStepDemo/Demos/MyDemo/MyLockStepClient/Assets/Plugins/System.Runtime.Serialization.Formatters.Soap.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0f2/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
