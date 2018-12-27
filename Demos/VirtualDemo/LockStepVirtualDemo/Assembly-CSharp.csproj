@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Actions\GeneralActions\GameStartAction.cs" />
     <Compile Include="Assets\Scripts\Actions\GeneralActions\PlayerInitAction.cs" />
     <Compile Include="Assets\Scripts\Actions\IAction.cs" />
+    <Compile Include="Assets\Scripts\Actions\LockStepActions\ForwardAction.cs" />
     <Compile Include="Assets\Scripts\Actions\LockStepActions\NoAction.cs" />
     <Compile Include="Assets\Scripts\LockStep\ConfirmedActions.cs" />
     <Compile Include="Assets\Scripts\LockStep\Fix64.cs" />

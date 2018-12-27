@@ -48,6 +48,19 @@ public class VirtualClient: MonoBehaviour
     }
 
 
+    public void ForwardPlayer(int id)
+    {
+        if(id==this.ID)
+        {
+            player.transform.transform.position += player.transform.forward;
+        }
+        else
+        {
+           otherPlayers[0].transform.transform.position += player.transform.forward;
+        }
+
+    }
+
     GameObject player;
     List<GameObject>otherPlayers=new List<GameObject>();
     public void InitPlayer(Vector3 pos)

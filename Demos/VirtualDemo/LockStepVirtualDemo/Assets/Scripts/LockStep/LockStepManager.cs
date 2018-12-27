@@ -35,6 +35,15 @@ public class LockStepManager
 
     public void Update()
     {
+        if(this.virtualClient.ID==0)
+        {
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+                AddAction(new ForwardAction { clientID=this.virtualClient.ID});
+            }
+        }
+
+
         //Basically same logic as FixedUpdate, but we can scale it by adjusting FrameLength
         AccumilatedTime = AccumilatedTime + Time.deltaTime;
 
@@ -49,6 +58,9 @@ public class LockStepManager
 
     private void GameFrameTurn()
     {
+      
+
+
         //first frame is used to process actions
         if (GameFrame == 0)
         {
@@ -154,6 +166,7 @@ public class LockStepManager
         {
             action.ProcessAction(this.virtualClient);
         }
+
     }
 
 }
