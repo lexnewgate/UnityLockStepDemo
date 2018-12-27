@@ -28,25 +28,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class SceneManager : MonoBehaviour {
-	
-	public static SceneManager Manager;
-	
-	public List<IHasGameFrame> GameFrameObjects;
-	
-	void Awake() {
-		Manager = this;
-		GameFrameObjects = new List<IHasGameFrame>();
-	}
-	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
+public class SceneManager
+{
+    public List<IHasGameFrame> GameFrameObjects;
+    #region Singleton
+    private SceneManager()
+    {
+        GameFrameObjects = new List<IHasGameFrame>();
+    }
+    static private SceneManager _instance;
+    static internal SceneManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new SceneManager();
+            }
+            return _instance;
+        }
+    }
+    #endregion
+
+
+
+
+
+
+
+
+
+
 }

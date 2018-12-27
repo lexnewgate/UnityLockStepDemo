@@ -52,7 +52,7 @@ class VirtualServer:Singleton<VirtualServer>
         {
             if(clientid!=playerId)
             {
-                VirtualManager.Instance.SendToClientLockStepAction(lockStepTurn, playerId, action);
+                VirtualManager.Instance.SendToClientLockStepAction(clientid,lockStepTurn, playerId, action);
             }
         }
 

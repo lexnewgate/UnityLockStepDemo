@@ -8,14 +8,14 @@ using UnityEngine;
 public class LockStepManager
 {
 
-    private VirtualClient m_virtualClient;
 
+    public VirtualClient virtualClient;
     public LockStepManager(VirtualClient virtualClient)
     {
-        this.m_virtualClient = virtualClient;
-        this.pendingActions = new PendingActions(this);
-        this.confirmedActions = new ConfirmedActions(this);
+        this.virtualClient = virtualClient;
         this.numberOfPlayers = VirtualManager.Instance.numberOfPlayers;
+        this.pendingActions = new PendingActions(this);
+        //this.confirmedActions = new ConfirmedActions(this);
 
 
     }
@@ -23,9 +23,9 @@ public class LockStepManager
     public int numberOfPlayers;
 
     private PendingActions pendingActions;
-    private ConfirmedActions confirmedActions;
+    //private ConfirmedActions confirmedActions;
 
-    private Queue<IAction> actionsToSend;
+    private Queue<IAction> actionsToSend=new Queue<IAction>();
 
 
 
@@ -69,7 +69,7 @@ public class LockStepManager
             //SceneManager.Manager.TwoDPhysics.Update (GameFramesPerSecond);
 
             List<IHasGameFrame> finished = new List<IHasGameFrame>();
-            foreach (IHasGameFrame obj in SceneManager.Manager.GameFrameObjects)
+            foreach (IHasGameFrame obj in SceneManager.Instance.GameFrameObjects)
             {
                 obj.GameFrameTurn(GameFramesPerSecond);
                 if (obj.Finished)
@@ -80,7 +80,7 @@ public class LockStepManager
 
             foreach (IHasGameFrame obj in finished)
             {
-                SceneManager.Manager.GameFrameObjects.Remove(obj);
+                SceneManager.Instance.GameFrameObjects.Remove(obj);
             }
 
             GameFrame++;
@@ -112,12 +112,12 @@ public class LockStepManager
 
     private bool NextTurn()
     {
-        if (confirmedActions.ReadyForNextTurn() && pendingActions.ReadyForNextTurn())
+        if (pendingActions.ReadyForNextTurn())
         {
             //increment the turn ID
             LockStepTurnID++;
             //move the confirmed actions to next turn
-            confirmedActions.NextTurn();
+            //confirmedActions.NextTurn();
             //move the pending actions to this turn
             pendingActions.NextTurn();
 
@@ -146,9 +146,9 @@ public class LockStepManager
             action = new NoAction();
         }
         //add action to our own list of actions to process
-        pendingActions.AddAction(action, this.m_virtualClient.ID, LockStepTurnID, LockStepTurnID);
+        pendingActions.AddAction(action, this.virtualClient.ID, LockStepTurnID, LockStepTurnID);
         //send action to other players
-        SendActionToOtherPlayers(LockStepTurnID,this.m_virtualClient.ID,action);
+        SendActionToOtherPlayers(LockStepTurnID,this.virtualClient.ID,action);
 
         ////confirm our own action
         //confirmedActions.playersConfirmedCurrentAction.Add(Network.player);
@@ -171,7 +171,7 @@ public class LockStepManager
 
     public void SendActionToOtherPlayers(int lockStepId,int playerid,IAction action)
     {
-        this.m_virtualClient.SendLockStepAction(lockStepId, playerid, action);
+        this.virtualClient.SendLockStepAction(lockStepId, playerid, action);
     }
 
   
@@ -179,7 +179,7 @@ public class LockStepManager
     {
         foreach (IAction action in pendingActions.CurrentActions)
         {
-            action.ProcessAction(this.m_virtualClient);
+            action.ProcessAction(this.virtualClient);
         }
     }
 

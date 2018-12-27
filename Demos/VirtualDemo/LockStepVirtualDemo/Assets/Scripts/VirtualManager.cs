@@ -11,7 +11,7 @@ class VirtualManager : Singleton<VirtualManager>
 
     public GameObject clientPrefab;
     public int numberOfPlayers=2;
-    public int clientId = 0;
+    int clientId = 0;
     public Dictionary<int, VirtualClient> virtualClientDict= new Dictionary<int, VirtualClient>();
 
     protected override void Awake()
@@ -38,9 +38,9 @@ class VirtualManager : Singleton<VirtualManager>
         virtualClientDict[clientId].OnReceiveGeneralAction(action);
     }
 
-    public void SendToClientLockStepAction(int lockStepTurn,int clientId, IAction action)
+    public void SendToClientLockStepAction(int clientid,int lockStepTurn,int playerid, IAction action)
     {
-        virtualClientDict[clientId].OnReceiveLockStepAction(lockStepTurn, clientId, action);
+        virtualClientDict[clientid].OnReceiveLockStepAction(lockStepTurn, playerid, action);
     }
 
     public void AddClient()

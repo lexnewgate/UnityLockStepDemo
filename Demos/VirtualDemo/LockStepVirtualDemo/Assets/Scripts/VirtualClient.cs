@@ -9,17 +9,14 @@ public class VirtualClient: MonoBehaviour
 {
     public int ID = 0;
     Queue<IAction> m_generalActions=new Queue<IAction>();
+
     public bool battleStart = false;
-
     private LockStepManager m_lockStepManager;
-    private void Awake()
-    {
-    }
 
-    public void Init()
+     public void Init()
     {
-        VirtualManager.Instance.ConnectToServer(ID);
         m_lockStepManager = new LockStepManager(this);
+        VirtualManager.Instance.ConnectToServer(ID);
     }
 
     private void Update()
@@ -31,7 +28,6 @@ public class VirtualClient: MonoBehaviour
 
         if(battleStart)
         {
-            Debug.Log($"client{ID} ready to lockstep");
             m_lockStepManager.Update();
         }
     }
@@ -48,7 +44,7 @@ public class VirtualClient: MonoBehaviour
 
     public void SendLockStepAction(int lockStepId, int playerid, IAction action)
     {
-        
+        VirtualManager.Instance.SendToServerLockStepAction(lockStepId, ID, action);
     }
 
 

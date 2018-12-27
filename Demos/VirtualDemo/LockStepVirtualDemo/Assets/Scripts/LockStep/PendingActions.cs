@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PendingActions
 {
@@ -83,12 +84,17 @@ public class PendingActions
         //add action for processing later
         if (actionsLockStepTurn == currentLockStepTurn + 1)
         {
-            
             NextNextNextActions[playerID] = action;
             nextNextNextActionsCount++;
         }
         else if (actionsLockStepTurn == currentLockStepTurn)
         {
+
+            if(playerID==this.lsm.virtualClient.ID&&NextNextActions[playerID]!=null)
+            {
+                Debug.Log("add self action multiple times");
+            }
+
             //if recieved action during our current turn
             //add for processing 2 turns away
           
