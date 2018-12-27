@@ -143,8 +143,6 @@ public class LockStepManager
         pendingActions.AddAction(action, clientId, LockStepTurnID, lockStepTurn);
     }
 
-
-
     public void SendActionToOtherPlayers(int lockStepId,int playerid,IAction action)
     {
         this.virtualClient.SendLockStepAction(lockStepId, playerid, action);

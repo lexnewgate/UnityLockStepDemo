@@ -18,11 +18,13 @@ class VirtualManager : Singleton<VirtualManager>
     {
         base.Awake();
         VirtualServer.Instance.Init();
-
         GameObject.Find("Canvas/Button").GetComponent<Button>().onClick.AddListener(AddClient);
 
     }
 
+
+
+    #region Network
     public void ConnectToServer(int clientId)
     {
         VirtualServer.Instance.OnClientConnected(clientId);
@@ -30,7 +32,7 @@ class VirtualManager : Singleton<VirtualManager>
 
     public void SendToServerLockStepAction(int lockStepTurn,int playerId,IAction action)
     {
-        VirtualServer.Instance.OnReceiveLockStepAction(lockStepTurn, playerId, action);
+        VirtualServer.Instance.RelayLockStepActionToOthers(lockStepTurn, playerId, action);
     }
 
     public void SendToClientGeneralAction(int clientId,IAction action)
@@ -42,6 +44,9 @@ class VirtualManager : Singleton<VirtualManager>
     {
         virtualClientDict[clientid].OnReceiveLockStepAction(lockStepTurn, playerid, action);
     }
+    #endregion
+
+
 
     public void AddClient()
     {
@@ -50,8 +55,6 @@ class VirtualManager : Singleton<VirtualManager>
         virtualClient.ID = clientId++;
         virtualClientDict[virtualClient.ID] = virtualClient;
         virtualClient.Init();
-       
-
         var ClientsRoot = GameObject.Find("Clients");
         if (ClientsRoot == null)
         {
