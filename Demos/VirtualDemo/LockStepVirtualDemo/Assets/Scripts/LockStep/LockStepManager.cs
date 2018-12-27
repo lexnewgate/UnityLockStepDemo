@@ -58,9 +58,6 @@ public class LockStepManager
 
     private void GameFrameTurn()
     {
-      
-
-
         //first frame is used to process actions
         if (GameFrame == 0)
         {
