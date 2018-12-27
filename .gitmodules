@@ -1,0 +1,3 @@
+[submodule "Demos/lockstepio"]
+	path = Demos/lockstepio
+	url = https://github.com/lexnewgate/lockstep.io.git
