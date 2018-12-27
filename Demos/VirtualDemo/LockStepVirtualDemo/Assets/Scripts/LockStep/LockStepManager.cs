@@ -7,17 +7,12 @@ using UnityEngine;
 
 public class LockStepManager
 {
-
-
     public VirtualClient virtualClient;
     public LockStepManager(VirtualClient virtualClient)
     {
         this.virtualClient = virtualClient;
         this.numberOfPlayers = VirtualManager.Instance.numberOfPlayers;
         this.pendingActions = new PendingActions(this);
-        //this.confirmedActions = new ConfirmedActions(this);
-
-
     }
 
     public int numberOfPlayers;
@@ -93,7 +88,6 @@ public class LockStepManager
 
     private bool LockStepTurn()
     {
-        //log.Debug("LockStepTurnID: " + LockStepTurnID);
         //Check if we can proceed with the next turn
         bool nextTurn = NextTurn();
         if (nextTurn)
@@ -114,13 +108,8 @@ public class LockStepManager
     {
         if (pendingActions.ReadyForNextTurn())
         {
-            //increment the turn ID
             LockStepTurnID++;
-            //move the confirmed actions to next turn
-            //confirmedActions.NextTurn();
-            //move the pending actions to this turn
             pendingActions.NextTurn();
-
             return true;
         }
 
@@ -140,41 +129,27 @@ public class LockStepManager
             action = actionsToSend.Dequeue();
         }
 
-        //if no action for this turn, send the NoAction action
         if (action == null)
         {
             action = new NoAction();
         }
-        //add action to our own list of actions to process
         pendingActions.AddAction(action, this.virtualClient.ID, LockStepTurnID, LockStepTurnID);
-        //send action to other players
         SendActionToOtherPlayers(LockStepTurnID,this.virtualClient.ID,action);
 
-        ////confirm our own action
-        //confirmedActions.playersConfirmedCurrentAction.Add(Network.player);
-        ////send action to all other players
-        //nv.RPC("RecieveAction", RPCMode.Others, LockStepTurnID, Network.player.ToString(), BinarySerialization.SerializeObjectToByteArray(action));
-
-        //log.Debug("Sent " + (action.GetType().Name) + " action for turn " + LockStepTurnID);
     }
 
     public void ReceiveAction(int lockStepTurn,int clientId,IAction action)
     {
         pendingActions.AddAction(action, clientId, LockStepTurnID, lockStepTurn);
-        //SendConfirmActionToServer(lockStepTurn, this.m_virtualClient.ID, clientId);
     }
 
-    //public void SendConfirmActionToServer(int lockStepTurn, int confirmingPlayerID,int confirmedPlayerID)
-    //{
-    //    throw new NotImplementedException();
-    //}
+
 
     public void SendActionToOtherPlayers(int lockStepId,int playerid,IAction action)
     {
         this.virtualClient.SendLockStepAction(lockStepId, playerid, action);
     }
 
-  
     private void ProcessActions()
     {
         foreach (IAction action in pendingActions.CurrentActions)

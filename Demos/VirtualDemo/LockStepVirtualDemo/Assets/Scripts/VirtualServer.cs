@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-class VirtualServer:Singleton<VirtualServer>
+class VirtualServer : Singleton<VirtualServer>
 {
-    public List<int> clientIDs=new List<int>();
+    public List<int> clientIDs = new List<int>();
 
     protected override void Awake()
     {
@@ -18,7 +18,7 @@ class VirtualServer:Singleton<VirtualServer>
 
     public void Init()
     {
-        
+
     }
 
     public void OnClientConnected(int clientID)
@@ -26,37 +26,44 @@ class VirtualServer:Singleton<VirtualServer>
         Debug.Log($"client {clientID} connected ");
         clientIDs.Add(clientID);
 
-        if(clientIDs.Count==VirtualManager.Instance.numberOfPlayers)
+        if (CheckAllReadyForGame())
         {
-            var gameStartAction = new GameStartAction();
-            gameStartAction.clientPosDict = new Dictionary<int, Vector3>();
-            foreach(var clientid in clientIDs)
-            {
-                gameStartAction.clientPosDict[clientid] = new Vector3(Random.Range(0,10),0,Random.Range(0,10));
-            }
-            BroadCastGeneralAction(gameStartAction);
+            NotifyGameStart();
         }
+    }
+
+    bool CheckAllReadyForGame()
+    {
+        return clientIDs.Count == VirtualManager.Instance.numberOfPlayers;
+    }
+
+    void NotifyGameStart()
+    {
+        var gameStartAction = new GameStartAction();
+        gameStartAction.clientPosDict = new Dictionary<int, Vector3>();
+        foreach (var clientid in clientIDs)
+        {
+            gameStartAction.clientPosDict[clientid] = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+        }
+        BroadCastGeneralAction(gameStartAction);
     }
 
     public void BroadCastGeneralAction(IAction action)
     {
-        foreach(var clientid in clientIDs)
+        foreach (var clientid in clientIDs)
         {
             VirtualManager.Instance.SendToClientGeneralAction(clientid, action);
         }
     }
 
-   public void OnReceiveLockStepAction(int lockStepTurn, int playerId, IAction action)
+    public void RelayLockStepActionToOthers(int lockStepTurn, int playerId, IAction action)
     {
-        foreach(var clientid in clientIDs)
+        foreach (var clientid in clientIDs)
         {
-            if(clientid!=playerId)
+            if (clientid != playerId)
             {
-                VirtualManager.Instance.SendToClientLockStepAction(clientid,lockStepTurn, playerId, action);
+                VirtualManager.Instance.SendToClientLockStepAction(clientid, lockStepTurn, playerId, action);
             }
         }
-
     }
-
-
 }
