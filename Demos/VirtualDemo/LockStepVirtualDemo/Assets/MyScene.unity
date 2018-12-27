@@ -306,7 +306,6 @@ MonoBehaviour:
   clientPrefab: {fileID: 4845712978055387188, guid: 78c2ba36d5f74bb43a71ae6429b8684e,
     type: 3}
   numberOfPlayers: 2
-  clientId: 0
 --- !u!1 &944929509
 GameObject:
   m_ObjectHideFlags: 0
