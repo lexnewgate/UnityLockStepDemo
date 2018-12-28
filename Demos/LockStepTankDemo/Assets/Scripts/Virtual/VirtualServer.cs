@@ -8,6 +8,10 @@ using Random = UnityEngine.Random;
 
 class VirtualServer : Singleton<VirtualServer>, IVirtualServer
 {
+    bool m_BattleStart = false;
+
+
+   
     //public List<int> clientIDs = new List<int>();
 
     //protected override void Awake()
@@ -67,24 +71,50 @@ class VirtualServer : Singleton<VirtualServer>, IVirtualServer
     //    }
     //}
 
-    
+    Dictionary<int, bool> m_PlayerReadyDict= new Dictionary<int, bool>();
+
+    public void Init()
+    {
+        Debug.Log("Server Started!");
+    }
+
+    void BroadcastGeneralAction(IGeneralAction action)
+    {
+        throw new NotImplementedException();
+    }
 
     void IVirtualServer.BroadcastGeneralAction(IGeneralAction action)
     {
         throw new NotImplementedException();
     }
 
-    bool IVirtualServer.CheckAllPlayerReady()
+    public bool CheckAllPlayerReady()
+    {
+        return this.m_PlayerReadyDict.Count == VirtualManager.Instance.NumOfPlayers;
+    }
+
+
+    public void NotifyGameStart()
     {
         throw new NotImplementedException();
     }
 
-    void IVirtualServer.NotifyGameStart()
+
+
+
+    public void OnReceiveClientReady(int clientId)
     {
-        throw new NotImplementedException();
+        this.m_PlayerReadyDict[clientId] = true;
+        Debug.Log($"Server received: client{clientId} ready!");
+        if(CheckAllPlayerReady())
+        {
+            NotifyGameStart();   
+        }
     }
 
-    void IVirtualServer.OnReceiveClientReady(int clientId)
+ 
+
+    void RelayLockStepActionToOthers(int playerId, int lockStepTurn, ILockStepAction action)
     {
         throw new NotImplementedException();
     }

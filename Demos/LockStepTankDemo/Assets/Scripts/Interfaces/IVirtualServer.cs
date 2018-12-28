@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 interface IVirtualServer
 {
+    void Init();
     void RelayLockStepActionToOthers(int playerId,int lockStepTurn,ILockStepAction action);
     void BroadcastGeneralAction(IGeneralAction action);
     void OnReceiveClientReady(int clientId);

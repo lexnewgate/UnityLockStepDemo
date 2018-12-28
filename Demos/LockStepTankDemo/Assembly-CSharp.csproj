@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\Actions\IAction.cs" />
     <Compile Include="Assets\Scripts\Actions\LockStepActions\ForwardAction.cs" />
     <Compile Include="Assets\Scripts\Actions\LockStepActions\NoAction.cs" />
+    <Compile Include="Assets\Scripts\Base\GameExtension.cs" />
     <Compile Include="Assets\Scripts\Base\Singleton.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Camera\CameraControl.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Managers\GameManager.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Scripts\GameScripts\UI\UIDirectionControl.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IGeneralAction.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ILockStepAction.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IVirtualClient.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IVirtualManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IVirtualServer.cs" />
     <Compile Include="Assets\Scripts\LockStep\ConfirmedActions.cs" />

@@ -8,6 +8,24 @@ using UnityEngine.UI;
 
 class VirtualManager : Singleton<VirtualManager>, IVirtualManager
 {
+    public GameObject m_ClientsRoot;
+    public GameObject m_ClientAssets;
+
+
+    private int m_clientId = 0;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        InitVirtualEnv();
+    }
+
+    void InitVirtualEnv()
+    {
+        CreateServer();
+        CreateClient(this.m_clientId++);
+        CreateClient(this.m_clientId++);
+    }
 
     //public GameObject clientPrefab;
     //public int numberOfPlayers=2;
@@ -63,4 +81,40 @@ class VirtualManager : Singleton<VirtualManager>, IVirtualManager
     //    client.transform.SetParent(ClientsRoot.transform);
     //}
     public int NumOfPlayers { get; private set; } = 2;
+
+    public void CreateClient(int clientId)
+    {
+        var clientGo = new GameObject($"{clientId}");
+        clientGo.transform.SetParent(this.m_ClientsRoot.transform);
+        var virtualClient=clientGo.AddComponent<VirtualClient>();
+        var clientAssetsGo = GameObject.Instantiate<GameObject>(this.m_ClientAssets);
+
+        //帧同步就像单机,load资源等操作是无差的.由虚拟导致的差异化这里处理,保持Client干净
+         var camera=clientAssetsGo.transform.FindDeepChild("Main Camera").GetComponent<Camera>();
+        if(clientId==0) //屏幕左边
+        {
+            camera.rect = new Rect(0, 0, 0.5f, 1);
+        }
+        else if(clientId==1)//屏幕右边
+        {
+
+            camera.rect = new Rect(0.5f, 0, 0.5f, 1);
+        }
+        else
+        {
+            Debug.LogError("暂只支持两个虚拟客户端");
+        }
+
+        virtualClient.Init(clientId, clientAssetsGo);
+    }
+
+    public void CreateServer()
+    {
+        VirtualServer.Instance.Init();
+    }
+
+    public void SendReadyToServer(int clientId)
+    {
+        VirtualServer.Instance.OnReceiveClientReady(clientId);
+    }
 }

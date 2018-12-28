@@ -17,5 +17,10 @@ using System.Threading.Tasks;
 
 interface IVirtualManager
 {
-    int NumOfPlayers { get;  }
+    int NumOfPlayers { get; }
+    void CreateServer();
+    void CreateClient(int clientId);
+    void SendReadyToServer(int clientId);
+
+
 }

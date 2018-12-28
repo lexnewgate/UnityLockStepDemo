@@ -4,9 +4,80 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class VirtualClient: MonoBehaviour
+public class VirtualClient: MonoBehaviour,IVirtualClient
 {
+    int m_clientId;
+    GameObject m_clientAssets;
+    bool m_battleReady = false;
+
+
+    public void Init(int clientId,GameObject clientAssets)
+    {
+        this.m_clientId = clientId;
+        this.m_clientAssets = clientAssets;
+        LoadClientAssets();
+        InitReadyBtn();
+
+    }
+
+    public void OnReceiveGeneralAction(IGeneralAction action)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnReceiveLockStepAction(ILockStepAction action)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SendClientReady()
+    {
+        VirtualManager.Instance.SendReadyToServer(this.m_clientId);
+    }
+
+    public void SendLockStepAction(ILockStepAction action)
+    {
+        throw new NotImplementedException();
+    }
+
+    void InitReadyBtn()
+    {
+        var readyBtnTrans=this.m_clientAssets.transform.FindDeepChild("ReadyBtn");
+        readyBtnTrans.gameObject.GetComponent<Button>().onClick.
+            AddListener(() => 
+            {
+                readyBtnTrans.gameObject.SetActive(false);
+                SendClientReady();
+            });
+    }
+
+
+    private void LoadClientAssets()
+    {
+        this.m_clientAssets.transform.SetParent(this.transform);
+    }
+
+    private void Update()
+    {
+        if(!m_battleReady)
+        {
+            return;
+        }
+
+        Debug.Log($"{this.m_clientId} LockStep");
+    }
+
+
+
+
+    //private void Awake()
+    //{
+    //    Debug.Log("Virtual Client Started");
+    //}
+
+
     //public int ID = 0;
     //Queue<IAction> m_generalActions=new Queue<IAction>();
 
