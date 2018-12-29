@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\GameScripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Managers\TankManager.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Shell\ShellExplosion.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\Tank.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Tank\TankHealth.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Tank\TankMovement.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Tank\TankShooting.cs" />

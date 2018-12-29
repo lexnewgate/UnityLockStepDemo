@@ -13,6 +13,9 @@ class VirtualManager : Singleton<VirtualManager>, IVirtualManager
 
     List<VirtualClient> m_virtualClients=new List<VirtualClient>();
 
+    public GameObject m_tankPrefab;
+
+
 
     private int m_clientId = 0;
 
@@ -88,6 +91,7 @@ class VirtualManager : Singleton<VirtualManager>, IVirtualManager
     {
         var clientGo = new GameObject($"{clientId}");
         clientGo.transform.SetParent(this.m_ClientsRoot.transform);
+        clientGo.transform.localPosition= new Vector3((clientId * 200) - 100,0,0);
         var virtualClient=clientGo.AddComponent<VirtualClient>();
         var clientAssetsGo = GameObject.Instantiate<GameObject>(this.m_ClientAssets);
 

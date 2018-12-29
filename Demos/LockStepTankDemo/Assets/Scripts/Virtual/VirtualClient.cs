@@ -9,8 +9,7 @@ using UnityEngine.UI;
 public class VirtualClient: MonoBehaviour,IVirtualClient
 {
     GameObject m_clientAssets;
-
-
+    List<Tank> m_Tanks=new List<Tank>();
 
     Queue<IGeneralAction> m_generalActions=new Queue<IGeneralAction>();
 
@@ -23,12 +22,19 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
         this.m_clientAssets = clientAssets;
         LoadClientAssets();
         InitReadyBtn();
-
     }
+
 
     public void InitPlayerTrans(Dictionary<int, PlayerTransFixData> playerInitTransDatas)
     {
-        throw new NotImplementedException(); 
+        foreach (var clientId_playerTransFixData in playerInitTransDatas)
+        {
+            var tank = new Tank();
+            var tankGo = Instantiate<GameObject>(VirtualManager.Instance.m_tankPrefab);
+            tankGo.transform.SetParent(this.m_clientAssets.transform);
+            tank.InitTank(clientId_playerTransFixData.Value, tankGo);
+            m_Tanks.Add(tank);
+        }
     }
 
 
@@ -66,7 +72,7 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
 
     private void LoadClientAssets()
     {
-        this.m_clientAssets.transform.SetParent(this.transform);
+        this.m_clientAssets.transform.SetParent(this.transform,false);
     }
 
     private void Update()
