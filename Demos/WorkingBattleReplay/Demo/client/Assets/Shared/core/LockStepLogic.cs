@@ -41,6 +41,7 @@ public class LockStepLogic {
     }
 
     public void updateLogic() {
+        
         float deltaTime = 0;
 #if _CLIENTLOGIC_
         deltaTime = UnityEngine.Time.deltaTime;

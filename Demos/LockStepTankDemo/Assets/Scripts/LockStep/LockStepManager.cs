@@ -7,6 +7,58 @@ using UnityEngine;
 
 public class LockStepManager
 {
+    private float m_fAccumulatedTime = 0f;
+    private float m_fNextGameTime= 0f;
+
+    private float m_fFrameLength = 0.05f; //50 miliseconds 运行每个同步帧的间隔 20fps 这个后续是否要调动态?
+    public static readonly int FirstLockStepTurnID = 0;
+    public int LockStepTurnID = FirstLockStepTurnID;
+    float m_fInterpolation = 0;// interpolation系数 0~1 
+
+    public void Update()
+    {
+        m_fAccumulatedTime += Time.deltaTime;
+        while(m_fAccumulatedTime>m_fNextGameTime)
+        {
+            if(LockStepTurnReady())
+            {
+                LockStepTurn();
+                this.m_fNextGameTime += this.m_fFrameLength;
+                this.LockStepTurnID++; 
+            }
+        }
+
+        this.m_fInterpolation = (this.m_fAccumulatedTime + this.m_fFrameLength - m_fNextGameTime) / this.m_fFrameLength;
+        UpdateRenderPosition(this.m_fInterpolation);
+    }
+
+
+    void UpdateRenderPosition(float interpolation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LogicCalculation()
+    {
+        throw new NotImplementedException();
+    }
+
+
+    bool LockStepTurnReady()
+    {
+        throw new NotImplementedException();
+    }
+
+    void LockStepTurn()
+    {
+        throw new NotImplementedException();
+    }
+
+    void GameFrameTurn()
+    {
+        throw new NotImplementedException();
+    }
+
     //public VirtualClient virtualClient;
     //public LockStepManager(VirtualClient virtualClient)
     //{
@@ -24,13 +76,7 @@ public class LockStepManager
 
 
 
-    //private float AccumilatedTime = 0f;
-    //private float FrameLength = 0.05f; //50 miliseconds
-    //private int GameFramesPerLocksetpTurn = 4;
-    //private int GameFrame = 0;
-    //private int GameFramesPerSecond = 20;
-    //public static readonly int FirstLockStepTurnID = 0;
-    //public int LockStepTurnID = FirstLockStepTurnID;
+
 
 
     //public void Update()

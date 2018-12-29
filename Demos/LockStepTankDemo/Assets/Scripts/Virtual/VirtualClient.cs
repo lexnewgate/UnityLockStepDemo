@@ -11,6 +11,8 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
     GameObject m_clientAssets;
     List<Tank> m_Tanks=new List<Tank>();
 
+    LockStepManager m_lockStepManager;
+
     Queue<IGeneralAction> m_generalActions=new Queue<IGeneralAction>();
 
     public int ID { get ; private set; }
@@ -22,6 +24,7 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
         this.m_clientAssets = clientAssets;
         LoadClientAssets();
         InitReadyBtn();
+        this.m_lockStepManager = new LockStepManager();
     }
 
 
@@ -86,6 +89,12 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
         {
             return;
         }
+        else
+        {
+            this.m_lockStepManager.Update();
+        }
+
+
 
         Debug.Log($"{this.ID} LockStep");
     }
