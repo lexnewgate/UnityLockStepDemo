@@ -2,12 +2,28 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConfirmedActions
+
+public class ConfirmedActions :IConfirmedActions
 {
     //    public List<NetworkPlayer> playersConfirmedCurrentAction;
     //    //public List<NetworkPlayer> playersConfirmedPriorAction;
 
     private LockStepManager lsm;
+
+    public void ConfirmAction(int lockStepTurn, int playerId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void NextTurn()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool ReadyForNextTurn()
+    {
+        throw new NotImplementedException();
+    }
 
     //    public ConfirmedActions(LockStepManager lsm)
     //    {

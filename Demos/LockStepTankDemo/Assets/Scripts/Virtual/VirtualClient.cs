@@ -94,8 +94,6 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
             this.m_lockStepManager.Update();
         }
 
-
-
         Debug.Log($"{this.ID} LockStep");
     }
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PendingActions
+public class PendingActions : IPendingActions
 {
 
     //public IAction[] CurrentActions;
@@ -109,4 +109,18 @@ public class PendingActions
     //    //if none of the conditions have been met, return false
     //    return false;
     //}
+    public void AddAction(ILockStepAction action, int actionLockStepTurn, int playerId, int currentLockStepTurn)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void NextTurn()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool ReadyForNextTurn()
+    {
+        throw new NotImplementedException();
+    }
 }

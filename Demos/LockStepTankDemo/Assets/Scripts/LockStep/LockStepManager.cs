@@ -15,6 +15,10 @@ public class LockStepManager
     public int LockStepTurnID = FirstLockStepTurnID;
     float m_fInterpolation = 0;// interpolation系数 0~1 
 
+    PendingActions m_PendingActions;
+    ConfirmedActions m_ConfirmedActions;
+
+
     public void Update()
     {
         m_fAccumulatedTime += Time.deltaTime;
@@ -45,18 +49,27 @@ public class LockStepManager
 
     bool LockStepTurnReady()
     {
-        throw new NotImplementedException();
+        return this.m_ConfirmedActions.ReadyForNextTurn() && this.m_PendingActions.ReadyForNextTurn();
     }
 
     void LockStepTurn()
     {
-        throw new NotImplementedException();
+        this.m_PendingActions.NextTurn();
+        this.m_ConfirmedActions.NextTurn();
+        
     }
 
-    void GameFrameTurn()
+    void SendPendingActions()
     {
         throw new NotImplementedException();
     }
+
+    void ProcessActions()
+    {
+        throw new NotImplementedException();
+    }
+
+
 
     //public VirtualClient virtualClient;
     //public LockStepManager(VirtualClient virtualClient)
