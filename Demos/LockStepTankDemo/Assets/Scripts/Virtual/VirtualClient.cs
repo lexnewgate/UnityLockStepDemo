@@ -9,9 +9,13 @@ using UnityEngine.UI;
 public class VirtualClient: MonoBehaviour,IVirtualClient
 {
     GameObject m_clientAssets;
-    bool m_battleReady = false;
+
+
+
+    Queue<IGeneralAction> m_generalActions=new Queue<IGeneralAction>();
 
     public int ID { get ; private set; }
+    public bool BattleStart { get; set ; }
 
     public void Init(int clientId,GameObject clientAssets)
     {
@@ -24,12 +28,13 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
 
     public void InitPlayerTrans(Dictionary<int, PlayerTransFixData> playerInitTransDatas)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); 
     }
+
 
     public void OnReceiveGeneralAction(IGeneralAction action)
     {
-        throw new NotImplementedException();
+        m_generalActions.Enqueue(action);
     }
 
     public void OnReceiveLockStepAction(ILockStepAction action)
@@ -66,7 +71,12 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
 
     private void Update()
     {
-        if(!m_battleReady)
+        while (m_generalActions.Count > 0)
+        {
+            m_generalActions.Dequeue().Handle(this);
+        }
+
+        if (!this.BattleStart)
         {
             return;
         }
@@ -84,7 +94,6 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
 
 
     //public int ID = 0;
-    //Queue<IAction> m_generalActions=new Queue<IAction>();
 
     //public bool battleStart = false;
     //private LockStepManager m_lockStepManager;
@@ -110,7 +119,6 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
 
     //public void OnReceiveGeneralAction(IAction action)
     //{
-    //    m_generalActions.Enqueue(action);
     //}
 
     //public void OnReceiveLockStepAction(int lockStepTurn,int playerid,IAction action)

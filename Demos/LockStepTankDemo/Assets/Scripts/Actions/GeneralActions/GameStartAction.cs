@@ -7,5 +7,6 @@ public class GameStartAction :IGeneralAction
     public void Handle(IVirtualClient virtualClient)
     {
         virtualClient.InitPlayerTrans(this.PlayerInitTransDatas);
+        virtualClient.BattleStart = true;
     }
 }

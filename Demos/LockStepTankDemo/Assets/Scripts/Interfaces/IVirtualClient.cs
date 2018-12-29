@@ -8,6 +8,7 @@ using UnityEngine;
 public interface IVirtualClient
 {
     int ID { get;  }
+    bool BattleStart { get; set; }
     void Init(int clientId, GameObject clientAssets);
     void OnReceiveGeneralAction(IGeneralAction action);
     void OnReceiveLockStepAction(ILockStepAction action);
