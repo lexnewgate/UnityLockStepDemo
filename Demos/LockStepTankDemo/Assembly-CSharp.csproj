@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{6B2224E3-F824-D370-6E00-50456DA646E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -120,8 +121,10 @@
     <Compile Include="Assets\Scripts\GameScripts\Tank\TankMovement.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Tank\TankShooting.cs" />
     <Compile Include="Assets\Scripts\GameScripts\UI\UIDirectionControl.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IConfirmedActions.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IGeneralAction.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ILockStepAction.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IPendingActions.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IVirtualClient.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IVirtualManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IVirtualServer.cs" />

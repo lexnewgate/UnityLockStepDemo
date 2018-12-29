@@ -43,7 +43,6 @@ public class LockStepManager
         throw new NotImplementedException();
     }
 
-
     bool LockStepTurnReady()
     {
         throw new NotImplementedException();

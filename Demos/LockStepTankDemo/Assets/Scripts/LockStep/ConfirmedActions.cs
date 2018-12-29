@@ -7,7 +7,7 @@ public class ConfirmedActions
     //    public List<NetworkPlayer> playersConfirmedCurrentAction;
     //    //public List<NetworkPlayer> playersConfirmedPriorAction;
 
-    //    private LockStepManager lsm;
+    private LockStepManager lsm;
 
     //    public ConfirmedActions(LockStepManager lsm)
     //    {
