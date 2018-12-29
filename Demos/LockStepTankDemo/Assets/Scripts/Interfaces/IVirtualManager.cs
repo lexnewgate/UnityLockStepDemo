@@ -22,5 +22,5 @@ interface IVirtualManager
     void CreateClient(int clientId);
     void SendReadyToServer(int clientId);
 
-
+    void SendGeneralActionToClients(IGeneralAction action);
 }

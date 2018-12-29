@@ -130,6 +130,7 @@
     <Compile Include="Assets\Scripts\LockStep\LockStepManager.cs" />
     <Compile Include="Assets\Scripts\LockStep\PendingActions.cs" />
     <Compile Include="Assets\Scripts\LockStep\SRandom.cs" />
+    <Compile Include="Assets\Scripts\Shared\PlayerTransFixData.cs" />
     <Compile Include="Assets\Scripts\Virtual\VirtualClient.cs" />
     <Compile Include="Assets\Scripts\Virtual\VirtualManager.cs" />
     <Compile Include="Assets\Scripts\Virtual\VirtualServer.cs" />

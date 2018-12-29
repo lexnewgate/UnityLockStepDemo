@@ -1,30 +1,11 @@
-﻿
+﻿using System.Collections.Generic;
 
-//using System.Collections.Generic;
-//using UnityEngine;
+public class GameStartAction :IGeneralAction 
+{
+    public Dictionary<int, PlayerTransFixData> PlayerInitTransDatas;
 
-//class GameStartAction : IAction
-//{
-//   public Dictionary<int, Vector3> clientPosDict;
-
-
-//    public void ProcessAction(VirtualClient client)
-//    {
-//        client.battleStart = true;
-
-//        foreach(var id_pos in clientPosDict)
-//        {
-//            if(client.ID==id_pos.Key)
-//            {
-//                client.InitPlayer(id_pos.Value);
-//            }
-//            else
-//            {
-//                client.InitOtherPlayer(id_pos.Key,id_pos.Value);
-//            }
-//        }
-
-
-
-//    }
-//}
+    public void Handle(IVirtualClient virtualClient)
+    {
+        virtualClient.InitPlayerTrans(this.PlayerInitTransDatas);
+    }
+}

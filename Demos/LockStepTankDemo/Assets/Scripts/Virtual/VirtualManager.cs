@@ -11,6 +11,8 @@ class VirtualManager : Singleton<VirtualManager>, IVirtualManager
     public GameObject m_ClientsRoot;
     public GameObject m_ClientAssets;
 
+    List<VirtualClient> m_virtualClients=new List<VirtualClient>();
+
 
     private int m_clientId = 0;
 
@@ -106,6 +108,7 @@ class VirtualManager : Singleton<VirtualManager>, IVirtualManager
         }
 
         virtualClient.Init(clientId, clientAssetsGo);
+        this.m_virtualClients.Add(virtualClient);
     }
 
     public void CreateServer()
@@ -116,5 +119,13 @@ class VirtualManager : Singleton<VirtualManager>, IVirtualManager
     public void SendReadyToServer(int clientId)
     {
         VirtualServer.Instance.OnReceiveClientReady(clientId);
+    }
+
+    public void SendGeneralActionToClients(IGeneralAction action)
+    {
+        foreach(var client in this.m_virtualClients)
+        {
+            client.OnReceiveGeneralAction(action);
+        }
     }
 }

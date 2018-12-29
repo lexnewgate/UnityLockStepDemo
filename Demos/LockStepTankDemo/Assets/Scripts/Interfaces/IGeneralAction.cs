@@ -11,5 +11,5 @@ using System.Threading.Tasks;
 /// </summary>
 public interface IGeneralAction
 {
-
+    void Handle(IVirtualClient virtualClient);
 }

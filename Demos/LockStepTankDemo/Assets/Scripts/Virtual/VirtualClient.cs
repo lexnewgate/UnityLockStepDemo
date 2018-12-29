@@ -8,18 +8,23 @@ using UnityEngine.UI;
 
 public class VirtualClient: MonoBehaviour,IVirtualClient
 {
-    int m_clientId;
     GameObject m_clientAssets;
     bool m_battleReady = false;
 
+    public int ID { get ; private set; }
 
     public void Init(int clientId,GameObject clientAssets)
     {
-        this.m_clientId = clientId;
+        this.ID = clientId;
         this.m_clientAssets = clientAssets;
         LoadClientAssets();
         InitReadyBtn();
 
+    }
+
+    public void InitPlayerTrans(Dictionary<int, PlayerTransFixData> playerInitTransDatas)
+    {
+        throw new NotImplementedException();
     }
 
     public void OnReceiveGeneralAction(IGeneralAction action)
@@ -34,7 +39,7 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
 
     public void SendClientReady()
     {
-        VirtualManager.Instance.SendReadyToServer(this.m_clientId);
+        VirtualManager.Instance.SendReadyToServer(this.ID);
     }
 
     public void SendLockStepAction(ILockStepAction action)
@@ -66,7 +71,7 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
             return;
         }
 
-        Debug.Log($"{this.m_clientId} LockStep");
+        Debug.Log($"{this.ID} LockStep");
     }
 
 
@@ -153,11 +158,5 @@ public class VirtualClient: MonoBehaviour,IVirtualClient
     //    otherPlayer.layer = this.ID+8;
     //    otherPlayers.Add(otherPlayer);
     //}
-
-
-
-
-
-
 
 }

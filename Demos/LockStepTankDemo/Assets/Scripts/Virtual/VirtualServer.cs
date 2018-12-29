@@ -10,6 +10,20 @@ class VirtualServer : Singleton<VirtualServer>, IVirtualServer
 {
     bool m_BattleStart = false;
 
+    PlayerTransFixData[] m_PlayerDatas=new PlayerTransFixData[4] {
+        new PlayerTransFixData{
+            Position = new FixVector3((Fix64)40,(Fix64)(-42),(Fix64)55),
+            Rotation =new FixVector3((Fix64)0,(Fix64)180,(Fix64)0)},
+        new PlayerTransFixData{
+            Position = new FixVector3((Fix64)56,(Fix64)(-42),(Fix64)20),
+            Rotation =new FixVector3((Fix64)0,(Fix64)0,(Fix64)0)},
+        new PlayerTransFixData{
+            Position = new FixVector3((Fix64)19,(Fix64)(-42),(Fix64)55),
+            Rotation =new FixVector3((Fix64)0,(Fix64)180,(Fix64)0)},
+        new PlayerTransFixData{
+            Position = new FixVector3((Fix64)6,(Fix64)(-42),(Fix64)4),
+            Rotation =new FixVector3((Fix64)0,(Fix64)0,(Fix64)0)},
+    };
 
    
     //public List<int> clientIDs = new List<int>();
@@ -70,7 +84,6 @@ class VirtualServer : Singleton<VirtualServer>, IVirtualServer
     //        }
     //    }
     //}
-
     Dictionary<int, bool> m_PlayerReadyDict= new Dictionary<int, bool>();
 
     public void Init()
@@ -78,14 +91,9 @@ class VirtualServer : Singleton<VirtualServer>, IVirtualServer
         Debug.Log("Server Started!");
     }
 
-    void BroadcastGeneralAction(IGeneralAction action)
+    public void BroadcastGeneralAction(IGeneralAction action)
     {
-        throw new NotImplementedException();
-    }
-
-    void IVirtualServer.BroadcastGeneralAction(IGeneralAction action)
-    {
-        throw new NotImplementedException();
+        VirtualManager.Instance.SendGeneralActionToClients(action);
     }
 
     public bool CheckAllPlayerReady()
@@ -93,14 +101,29 @@ class VirtualServer : Singleton<VirtualServer>, IVirtualServer
         return this.m_PlayerReadyDict.Count == VirtualManager.Instance.NumOfPlayers;
     }
 
+    Tuple<int,int>GetTwoDistinctIndex()
+    {
+        Random.InitState((int)(Time.time * 1000));
+        int first = Random.Range(0, 4);
+        int temp = Random.Range(0, 4);
+        int second= (temp == first) ? (temp + 1)%4 : temp;
+        return new Tuple<int, int>(first, second);
+    }
 
     public void NotifyGameStart()
     {
-        throw new NotImplementedException();
+        var first_second = GetTwoDistinctIndex();
+
+        var playerInitTransDatas = new Dictionary<int, PlayerTransFixData>
+        {
+            { 0, this.m_PlayerDatas[first_second.Item1]},
+            {1, this.m_PlayerDatas[first_second.Item2] }
+        };
+
+        BroadcastGeneralAction(new GameStartAction {
+            PlayerInitTransDatas = playerInitTransDatas 
+        });
     }
-
-
-
 
     public void OnReceiveClientReady(int clientId)
     {
@@ -112,15 +135,10 @@ class VirtualServer : Singleton<VirtualServer>, IVirtualServer
         }
     }
 
- 
-
-    void RelayLockStepActionToOthers(int playerId, int lockStepTurn, ILockStepAction action)
-    {
-        throw new NotImplementedException();
-    }
-
-    void IVirtualServer.RelayLockStepActionToOthers(int playerId, int lockStepTurn, ILockStepAction action)
+    public void RelayLockStepActionToOthers(int playerId, int lockStepTurn, ILockStepAction action)
     {
         throw new NotImplementedException();
     }
 }
+
+
